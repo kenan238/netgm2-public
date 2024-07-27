@@ -11,10 +11,10 @@ Uses `GameMaker 2024.4.1.152`, works with all versions above `> 2023.8`.
 - [Client documentation](https://github.com/kenan238/netgm2-docs-client/blob/main/start.md)
 - [Server plugin documentation](https://github.com/kenan238/netgm2-docs-server/blob/main/start.md)
 
-
 The server can be installed [here](https://kenanyazbeck.com/netgm2/server-latest).
 
 Feel free to submit questions or bugs as Issues.
 
-
 ## Feel free to contact me through the socials in my Website!
+
+> NetGM2 © 2023-2024 by kenan238 is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-nd/4.0/
