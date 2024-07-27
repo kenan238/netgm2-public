@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"NetGM2",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"NetGM2",
+  "parent":{
+    "name":"NetGM2",
+    "path":"folders/Scripts/NetGM2.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
