@@ -17,4 +17,4 @@ The server can be installed [here](https://kenanyazbeck.com/netgm2/server-latest
 Feel free to submit questions or bugs as Issues.
 
 
-## Visit my website to contact me.
+## Feel free to contact me through the socials in my Website!
