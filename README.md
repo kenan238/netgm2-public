@@ -1,5 +1,5 @@
 # NetGM2 public repo
-![Logo](github/logo.png)
+![Logo](github-logo.png)
 
 ## This is a simple and advanced networking library for GameMaker currently in beta.
 
