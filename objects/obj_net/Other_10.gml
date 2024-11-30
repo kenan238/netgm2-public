@@ -1,4 +1,4 @@
-/// @description When initialized
+/// @description Wtheyn initialized
 state = NET_STATE.CONNECTED
 __net_log("Connected!")
 var _rpck = {

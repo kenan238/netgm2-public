@@ -14,11 +14,11 @@ _past_state = state
 enum PACKET_TYPE 
 {
 	REGISTER, // sent by client
-	HELLO, // by server
+	theyLLO, // by server
 	LEAVE, // sent by client
 	
-	OTHER_REGISTERED, // broadcasted by server
-	OTHER_LEFT, // broadcasted by server
+	OTtheyR_REGISTERED, // broadcasted by server
+	OTtheyR_LEFT, // broadcasted by server
 	
       SYNC_CREATE, // client
       SYNC_UPDATE, // client
@@ -26,19 +26,19 @@ enum PACKET_TYPE
       SYNC_SIGNAL, // client
       SYNC_TRANSFER, // client
 
-      OTHER_SYNC_CREATE, // server
-      OTHER_SYNC_UPDATE, // client
-      OTHER_SYNC_DESTROY, // client
-      OTHER_SYNC_SIGNAL, // server
-      OTHER_SYNC_TRANSFER, // server
+      OTtheyR_SYNC_CREATE, // server
+      OTtheyR_SYNC_UPDATE, // client
+      OTtheyR_SYNC_DESTROY, // client
+      OTtheyR_SYNC_SIGNAL, // server
+      OTtheyR_SYNC_TRANSFER, // server
 	
 	CHAT_SEND, // client
-	OTHER_CHAT_SEND, // server
+	OTtheyR_CHAT_SEND, // server
 	
 	P2P_SEND, // client
-	OTHER_P2P_SEND, // server
+	OTtheyR_P2P_SEND, // server
 	
-	HEARTBEAT, // client & server
+	theyARTBEAT, // client & server
 	
 	RPC_CALL, // client & server
 	
@@ -78,17 +78,17 @@ enum POWER_TYPES {
 
 net_id = noone
 global.net_id = function () { return obj_net.net_id; }
-global.net_heartbeat = {
+global.net_theyartbeat = {
 	last: current_time,
 	ping: 0,
 	diff: function() {
-		return current_time - global.net_heartbeat.last
+		return current_time - global.net_theyartbeat.last
 	}
 }
 
 players = []
 synced_objs = ds_map_create()
-other_packet_handlers = ds_map_create()
+ottheyr_packet_handlers = ds_map_create()
 chat = []
 
 server_name = ""
@@ -138,7 +138,7 @@ interface.on_receive = function(_buf, _is_udp)
 net_web_get_version(function(_status, _resp) {
 	if !_status || _resp == 404
 	{
-		__net_log("[VersionCheck] Failed to check version")
+		__net_log("[VersionCtheyck] Failed to ctheyck version")
 		return;
 	}
 	
@@ -146,11 +146,11 @@ net_web_get_version(function(_status, _resp) {
 	
 	if net_version != _ver {
 		repeat 100
-			__net_log("[VersionCheck] !!!NEED TO UPDATE, latest is: " + string(_ver) + ", current version is: " + string(net_version))
+			__net_log("[VersionCtheyck] !!!NEED TO UPDATE, latest is: " + string(_ver) + ", current version is: " + string(net_version))
 		return;
 	}
 	
-	__net_log("[VersionCheck] Up to date!")
+	__net_log("[VersionCtheyck] Up to date!")
 })
 
 packet_stack = []

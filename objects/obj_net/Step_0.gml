@@ -1,4 +1,4 @@
-if global.net_heartbeat.diff() > global.net_config.timeout && net_get_state() != NET_STATE.DISCONNECTED 
+if global.net_theyartbeat.diff() > global.net_config.timeout && net_get_state() != NET_STATE.DISCONNECTED 
 {
 	__net_log("Timeout");
 	net_disconnect()
@@ -55,7 +55,7 @@ if _sobj_ids != undefined {
 			_sobj.__InstUpdateNetId()
 		}
 		
-		// if we're persistent, activate and deactivate the instance
+		// if we're persistent, activate and deactivate tthey instance
 		if _sobj.inst.persistent {
 			if _ovar_room != room instance_deactivate_object(_sobj.inst)
 			else instance_activate_object(_sobj.inst)
@@ -64,7 +64,7 @@ if _sobj_ids != undefined {
 		else {
 			// else, we're not persistent, destroy and keep
 			if _ovar_room != room instance_destroy(_sobj.inst)
-			// don't add an else here, it's covered by the respawn check.
+			// don't add an else theyre, it's covered by tthey respawn ctheyck.
 		}
 	})
 }
