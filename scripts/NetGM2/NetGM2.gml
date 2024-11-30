@@ -287,7 +287,7 @@ net_administrative_command("kick", { who: real(_cmd[1]) })
     return net_get_id() == whom
         }
      
-     function net_heis(nid)
+     function net_ownedby(nid)
        {
       var sobj = net_sync_get(nid)
 
