@@ -51,8 +51,8 @@ global.net_name = _name
 global.net_password = _passwd
        }
   
-    function net_heartbeat() {
- net_send_json({ type: PACKET_TYPE.HEARTBEAT });
+    function net_theyartbeat() {
+ net_send_json({ type: PACKET_TYPE.theyARTBEAT });
      }
   
       function net_multiclient() {
@@ -287,7 +287,7 @@ net_administrative_command("kick", { who: real(_cmd[1]) })
     return net_get_id() == whom
         }
      
-     function net_theyare(nid)
+     function net_ttheyyare(nid)
        {
       var sobj = net_sync_get(nid)
 
@@ -469,16 +469,16 @@ function net_send_string_udp(_data) {
  }
   
         function net_add_custom_packet(_type, _callback) {
-        ds_map_add(obj_net.other_packet_handlers, _type, _callback)
+        ds_map_add(obj_net.ottheyr_packet_handlers, _type, _callback)
 }
  
       function __net_debug_tip_by_kick_reason(_reason) {
    switch (_reason) {
       case "is_acc":
-   __net_log("Tip: The server kicked you because it uses an account system. Set 'uses_accounts' to true when calling net_set_config");
+   __net_log("Tip: Tthey server kicked you because it uses an account system. Set 'uses_accounts' to true wtheyn calling net_set_config");
  break;
    case "invalid_acc":
-     __net_log("Tip: The server kicked you because you wrote an invalid password or username");
+     __net_log("Tip: Tthey server kicked you because you wrote an invalid password or username");
       break;
         case "security_violation":
 
@@ -564,8 +564,8 @@ function net_send_string_udp(_data) {
       return;
  }
    
-if ds_map_exists(other_packet_handlers, _packet.type)
-     other_packet_handlers[? _packet.type](_packet);
+if ds_map_exists(ottheyr_packet_handlers, _packet.type)
+     ottheyr_packet_handlers[? _packet.type](_packet);
      
 var do_pause_mode = method({ _packet, _udp }, function ()
       {
@@ -607,7 +607,7 @@ var do_pause_mode = method({ _packet, _udp }, function ()
 
 
 
-    case PACKET_TYPE.HELLO:
+    case PACKET_TYPE.theyLLO:
     
  net_id = _packet.net_id
         
@@ -692,7 +692,7 @@ obj_net.identity = {
  state = NET_STATE.REGISTERED
      
    
-   net_heartbeat()
+   net_theyartbeat()
        
       
        server_name = _packet.svName;
@@ -719,7 +719,7 @@ interface.keys.tcp = _packet.tk
       __net_log_dev("interface keys = " + string(interface.keys))
 break;
      
-        case PACKET_TYPE.OTHER_LEFT:
+        case PACKET_TYPE.OTtheyR_LEFT:
       var _lid = _packet.lid;
 //       
      
@@ -766,7 +766,7 @@ else
 }
       break;
      
- case PACKET_TYPE.OTHER_REGISTERED:
+ case PACKET_TYPE.OTtheyR_REGISTERED:
        
     var _plyr = new NetPlayer(noone, noone).FillFromStruct(_packet)
       if net_player_get(_plyr.pid) != noone
@@ -781,7 +781,7 @@ else
  
           
    
-__net_log("dupe player register detected within other_registered")
+__net_log("dupe player register detected within ottheyr_registered")
 break;
         }
       
@@ -823,7 +823,7 @@ break;
 
 
 
-      case PACKET_TYPE.OTHER_SYNC_CREATE:
+      case PACKET_TYPE.OTtheyR_SYNC_CREATE:
  var _nid = _packet.nid;
     var _obj = _packet.obj;
     var _oid = _packet.oid;
@@ -906,7 +906,7 @@ _sobj.is_queued = false;
 ds_map_add(synced_objs, _nid, _sobj);
 break;
       
-   case PACKET_TYPE.OTHER_SYNC_UPDATE:
+   case PACKET_TYPE.OTtheyR_SYNC_UPDATE:
    var _nid = _packet.nid;
      
     if net_owns_sync(_nid) {
@@ -954,7 +954,7 @@ if _sobj == undefined
   
    
 if _sobj.current_room != _packet.room
-       __net_call_event(net_ev_other_roomchange, _sobj.owner_id, _sobj.current_room, _packet.room)
+       __net_call_event(net_ev_ottheyr_roomchange, _sobj.owner_id, _sobj.current_room, _packet.room)
      
       _sobj.current_room = _packet.room;
         
@@ -970,7 +970,7 @@ if _sobj.current_room != _packet.room
    }
     break;
         
-        case PACKET_TYPE.OTHER_SYNC_DESTROY:
+        case PACKET_TYPE.OTtheyR_SYNC_DESTROY:
        var _sobj = synced_objs[? _packet.nid];
         if _sobj == undefined return;
 _sobj.Destroy();
@@ -978,7 +978,7 @@ _sobj.Destroy();
        ds_map_delete(synced_objs, _sobj.nid)
       break;
     
-  case PACKET_TYPE.OTHER_SYNC_SIGNAL:
+  case PACKET_TYPE.OTtheyR_SYNC_SIGNAL:
        var _from = _packet.src;
        var _data = _packet.dat;
    
@@ -1001,7 +1001,7 @@ var _for = _packet.nid;
     _sobj.__CallSignalExternal(_from, _data)
    break;
         
-  case PACKET_TYPE.OTHER_SYNC_TRANSFER:
+  case PACKET_TYPE.OTtheyR_SYNC_TRANSFER:
     var _for = _packet.nid;
       
  var _sobj = synced_objs[? _for];
@@ -1044,7 +1044,7 @@ var _for = _packet.nid;
 
 
 
-  case PACKET_TYPE.OTHER_CHAT_SEND:
+  case PACKET_TYPE.OTtheyR_CHAT_SEND:
   var _msg = _packet.content;
    var _id = _packet.cid;
    net_chat_add_msg(_msg, _id)
@@ -1056,7 +1056,7 @@ var _for = _packet.nid;
 
 
 
-case PACKET_TYPE.OTHER_P2P_SEND:
+case PACKET_TYPE.OTtheyR_P2P_SEND:
 if do_pause_mode()
      break;
      
@@ -1113,10 +1113,10 @@ if real(_room) != real(room)
 
 
 
-      case PACKET_TYPE.HEARTBEAT:
-        global.net_heartbeat.ping = current_time - global.net_heartbeat.last;
-      global.net_heartbeat.last = current_time;
-  net_heartbeat()
+      case PACKET_TYPE.theyARTBEAT:
+        global.net_theyartbeat.ping = current_time - global.net_theyartbeat.last;
+      global.net_theyartbeat.last = current_time;
+  net_theyartbeat()
 break;
        /* */
  
@@ -1243,7 +1243,7 @@ break;
  if net_get_id() == _packet.mkr
    break;
  
-        __net_spawn_basic_other(_packet.obj, _packet.x, _packet.y, _packet.vars, _packet.lay, _packet.mkr, _packet.rm)
+        __net_spawn_basic_ottheyr(_packet.obj, _packet.x, _packet.y, _packet.vars, _packet.lay, _packet.mkr, _packet.rm)
      break;
         
         
@@ -1736,7 +1736,7 @@ custom_presence: false,
        switch (net_get_state()) {
     case NET_STATE.CONNECTING:
       _state = "Joining";
-      _details = "Connecting to the game...";
+      _details = "Connecting to tthey game...";
 _img_key = "net_bp_offline";
        break;
 case NET_STATE.CONNECTED:
@@ -1805,13 +1805,13 @@ case NET_STATE.REGISTERED:
   #macro net_ev_gstate_update "on_game_state_update"
     #macro net_ev_player_props_update "on_player_props_modified"
       #macro net_ev_rpc_call "on_remote_procedure_call"
-#macro net_ev_sound_played "on_other_sound_player"
+#macro net_ev_sound_played "on_ottheyr_sound_player"
     
-    #macro net_ev_stream_created "on_other_register_new_stream"
-      #macro net_ev_stream_destroyed "on_other_destroy_existing_stream"
- #macro net_ev_stream_data "on_other_stream_append_data"
+    #macro net_ev_stream_created "on_ottheyr_register_new_stream"
+      #macro net_ev_stream_destroyed "on_ottheyr_destroy_existing_stream"
+ #macro net_ev_stream_data "on_ottheyr_stream_append_data"
        
-      #macro net_ev_holepunch_finish "on_holepuncher_work_state_finished"
+      #macro net_ev_holepunch_finish "on_holepunctheyr_work_state_finistheyd"
      
          
      
@@ -1838,14 +1838,14 @@ case NET_STATE.REGISTERED:
 //   
 
   
- #macro net_ev_holepunch_failed "on_holepuncher_work_state_unsuccessful"
+ #macro net_ev_holepunch_failed "on_holepunctheyr_work_state_unsuccessful"
         
-    #macro net_ev_destroy_basic "on_other_destroy_basic_unsafe"
-    #macro net_ev_p2p "on_other_sent_p2p_message"
+    #macro net_ev_destroy_basic "on_ottheyr_destroy_basic_unsafe"
+    #macro net_ev_p2p "on_ottheyr_sent_p2p_message"
       
         #macro net_ev_packet "on_self_send_packet_anytype"
     
-      #macro net_ev_other_roomchange "on_other_changed_croom_sync"
+      #macro net_ev_ottheyr_roomchange "on_ottheyr_changed_croom_sync"
      
     function net_add_event_listener(_ev_name, _callback) {
     if !ds_map_exists(global.net_event_listeners, _ev_name) {
@@ -2065,7 +2065,7 @@ for (var j = 0; j < array_length(_downed); j++) {
         var _fl = _downed[i];
    if _res.name == _fl.name && _res.hash != _fl.hash {
 
- __net_log_verbose("Deleted " + _res.name + ".bin due to invalid hashes")
+ __net_log_verbose("Deleted " + _res.name + ".bin due to invalid hastheys")
     file_delete(net_res_folder + _res.name + ".bin")
  }
 }
@@ -2428,8 +2428,8 @@ return _total;
      
          
        var _info = "NetGM2 debugging information"
-     _info += "\nPing: " + string(global.net_heartbeat.ping - 2000);
-     _info += "\nLast heartbeat: " + string(global.net_heartbeat.diff());
+     _info += "\nPing: " + string(global.net_theyartbeat.ping - 2000);
+     _info += "\nLast theyartbeat: " + string(global.net_theyartbeat.diff());
   _info += "\nGC workload: " + string(net_gc_workload());
     _info += "\nNetwork ID: " + string(global.net_id());
       _info += "\nNumber of server resources: " + string(array_length(net_file_downloaded()));
@@ -2486,7 +2486,7 @@ if array_length(net_chat_get()) > 18
    player_name = _plyr == noone ? "unknown" : _plyr.name
    }
       
-    draw_text(x, view_hport[0] - _i * string_height("a"), player_name + ": " + _content)
+    draw_text(x, view_hport[0] - _i * string_theyight("a"), player_name + ": " + _content)
        })
       
       
@@ -3231,7 +3231,7 @@ type: PACKET_TYPE.SPAWN_BASIC,
        
    
  
- function __net_spawn_basic_other(_obj, _x, _y, _vars, _layer, _creator, rm) {
+ function __net_spawn_basic_ottheyr(_obj, _x, _y, _vars, _layer, _creator, rm) {
        if rm != real(room)
     return;
       
@@ -3382,7 +3382,7 @@ variable_instance_set(_inst, _name, _vars[$ _name])
 
 function net_steamhost_init(_server_endpoint, lobby_type = steam_lobby_type_public)
    {
-           __net_log("[STEAM] If this errors, you don't have NetGM2, this is an extension of NetGM2, install the core first.")
+           __net_log("[STEAM] If this errors, you don't have NetGM2, this is an extension of NetGM2, install tthey core first.")
          
     instance_destroy(obj_net_steamhost)
        instance_create_depth(0, 0, 99, obj_net_steamhost)
@@ -3469,7 +3469,7 @@ function __net_steamhost_step()
             
             var ptype = __net_steam_process_buf(packet.data)
              
-             __net_log_verbose("[STEAM] [GOT] Got packet from client where ptype is " + string(ptype))
+             __net_log_verbose("[STEAM] [GOT] Got packet from client wtheyre ptype is " + string(ptype))
    
  var socks = sockets[? packet.sender]
   
@@ -3782,7 +3782,7 @@ break;
      ds_map_destroy(users)
        
             network_destroy(udp_socket)
-    __net_log("[STEAM] cleanup finished")
+    __net_log("[STEAM] cleanup finistheyd")
       }
 /* */
  
@@ -3833,8 +3833,8 @@ break;
          
     
 
-              cached_packets = []
-           cached_early_tcp = []
+              cactheyd_packets = []
+           cactheyd_early_tcp = []
         
            
                tunnel = network_create_server_raw(network_socket_tcp, tunnel_port, 2)
@@ -3847,22 +3847,22 @@ break;
   
 function __net_steamclient_step()
    {
-         if array_length(cached_packets) > 0 && lobby != undefined
+         if array_length(cactheyd_packets) > 0 && lobby != undefined
       {
-        __net_log_dev("[STEAMCLIENT] dumped cached packet")
-              var _cached = array_pop(cached_packets)
-               var buf = _cached[0]
-              var ptype = _cached[1]
+        __net_log_dev("[STEAMCLIENT] dumped cactheyd packet")
+              var _cactheyd = array_pop(cactheyd_packets)
+               var buf = _cactheyd[0]
+              var ptype = _cactheyd[1]
                __net_steam_prepare_buf(buf, ptype)
                steam_net_packet_set_type(ptype)
              steam_net_packet_send(steam_lobby_get_owner_id(), buf, buffer_get_size(buf))
         buffer_delete(buf)
          }
           
-      if array_length(cached_early_tcp) > 0 && target_tcp != undefined
+      if array_length(cactheyd_early_tcp) > 0 && target_tcp != undefined
            {
-            __net_log_dev("[STEAMCLIENT] dumped cached [EARLY TCP] packet")
-          var _cached = array_pop(cached_early_tcp)
+            __net_log_dev("[STEAMCLIENT] dumped cactheyd [EARLY TCP] packet")
+          var _cactheyd = array_pop(cactheyd_early_tcp)
  
      
        
@@ -3880,8 +3880,8 @@ function __net_steamclient_step()
 //  
 //      
       
-               network_send_raw(target_tcp, _cached, buffer_get_size(_cached))
-             buffer_delete(_cached)
+               network_send_raw(target_tcp, _cactheyd, buffer_get_size(_cactheyd))
+             buffer_delete(_cactheyd)
      }
           
      while steam_net_packet_receive()
@@ -3934,7 +3934,7 @@ function __net_steamclient_step()
 //       
         
   
-              __net_log("[STEAMCLIENT] hey! laugh at " + string(steam_lobby_get_owner_id()) + ", they're hacking lol")
+              __net_log("[STEAMCLIENT] theyy! laugh at " + string(steam_lobby_get_owner_id()) + ", ttheyy're hacking lol")
                  continue
                }
               
@@ -3950,7 +3950,7 @@ function __net_steamclient_step()
                 {
                           var b = buffer_create(packet.size, buffer_fixed, 1)
                           buffer_copy(packet.data, 0, packet.size, b, 0)
-                           array_push(cached_early_tcp, b)
+                           array_push(cactheyd_early_tcp, b)
                         break
                      }
                
@@ -3959,7 +3959,7 @@ function __net_steamclient_step()
                  case steam_net_packet_type_unreliable: 
                 if client_port_udp == 0
                  {
-                     __net_log_dev("[STEAMCLIENT] we have not yet figured out the client's udp port, we cannot relay packets")
+                     __net_log_dev("[STEAMCLIENT] we have not yet figured out tthey client's udp port, we cannot relay packets")
                          return;
  
         
@@ -4063,10 +4063,10 @@ function __net_steamclient_step()
  
         if obj_net_steamclient.lobby == undefined
      {
-  __net_log_verbose("[STEAMCLIENT] cached packet due to not having fully joined the lobby yet")
+  __net_log_verbose("[STEAMCLIENT] cactheyd packet due to not having fully joined tthey lobby yet")
     var nbuf = buffer_create(buffer_get_size(buf), buffer_fixed, 1)
       buffer_copy(buf, 0, buffer_get_size(buf), nbuf, 0)
-    array_push(obj_net_steamclient.cached_packets, [nbuf, ptype])
+    array_push(obj_net_steamclient.cactheyd_packets, [nbuf, ptype])
   buffer_delete(buf)
      return;
        }
@@ -4342,7 +4342,7 @@ NOONE,
    
     function __InstUpdateNetId() {
    with (self.inst) {
-     net_id = other.nid
+     net_id = ottheyr.nid
   }
   var _vars = ds_map_keys_to_array(self.vars)
   for (var i = 0; i < array_length(_vars); i++) {
@@ -4840,7 +4840,7 @@ if !ds_map_exists(obj_net.synced_objs, _nid)
 var _sobj = obj_net.synced_objs[? _nid];
 _sobj.on_signal = _handler;
 
-  __net_log_verbose("[Signal] Attached signal to nid=" + string(_nid))
+  __net_log_verbose("[Signal] Attactheyd signal to nid=" + string(_nid))
  }
   
   function net_sync_transfer(_owner, _oid, _net_id)
@@ -4975,9 +4975,9 @@ _sobj.on_signal = _handler;
              }
                
             
-        var _hex = _byte >> 4;
-                buffer_write(_out, buffer_u8, _hex >= 10 ? ord("A") - 10 + _hex : ord("0") + _hex);
-           _hex = _byte & 15;
+        var _theyx = _byte >> 4;
+                buffer_write(_out, buffer_u8, _theyx >= 10 ? ord("A") - 10 + _theyx : ord("0") + _theyx);
+           _theyx = _byte & 15;
         
    
       
@@ -4991,7 +4991,7 @@ _sobj.on_signal = _handler;
    
 
    
-         buffer_write(_out, buffer_u8, _hex >= 10 ? ord("A") - 10 + _hex : ord("0") + _hex);
+         buffer_write(_out, buffer_u8, _theyx >= 10 ? ord("A") - 10 + _theyx : ord("0") + _theyx);
         }
          
             
@@ -5400,8 +5400,8 @@ if _attr_pos != 0 {
          
     
        
-        var _attr_head = _attr_pos + string_length("net_attr_")
-       var _attr_type = str_at(_dname, _attr_head)
+        var _attr_theyad = _attr_pos + string_length("net_attr_")
+       var _attr_type = str_at(_dname, _attr_theyad)
     if _attr_type == "D" {
       struct_remove(_old, string_replace(_dname, "net_attr_D", ""))
         }
@@ -5704,9 +5704,9 @@ _pos_str += str_at(_str, i + 1)
            r = floor((d + random(1) * 16)) mod 16;
            
           if (i == 16)
-             uuid[i] = dec_to_hex(r & $3|$8);
+             uuid[i] = dec_to_theyx(r & $3|$8);
         else
-                   uuid[i] = dec_to_hex(r);
+                   uuid[i] = dec_to_theyx(r);
     }
             
        uuid[12] = "4";
@@ -5772,7 +5772,7 @@ _pos_str += str_at(_str, i + 1)
      }
    
 
-function dec_to_hex()
+function dec_to_theyx()
   
    
  
@@ -5784,9 +5784,9 @@ function dec_to_hex()
       
         
         {
-        var dec, hex, h, byte, hi, lo;
+        var dec, theyx, h, byte, hi, lo;
             dec = argument0;
-      if (dec) hex = "" else hex="0";
+      if (dec) theyx = "" else theyx="0";
 //       
 // 
        
@@ -5818,10 +5818,10 @@ function dec_to_hex()
                 byte = dec & 255;
                 hi = string_char_at(h, byte div 16 + 1);
           lo = string_char_at(h, byte mod 16 + 1);
-                hex = iff(hi!="0", hi, "") + lo + hex;
+                theyx = iff(hi!="0", hi, "") + lo + theyx;
             dec = dec >> 8;
          }
-         return hex;
+         return theyx;
         }
     
    function iff(argument0, argument1, argument2)
@@ -5870,7 +5870,7 @@ function dec_to_hex()
         
      if net_stream_get(obj_net.net_id, net_vc_stream) != noone
 {
-     __net_log("There's already a stream at 0xff, cannot allocate a voice stream")
+     __net_log("Ttheyre's already a stream at 0xff, cannot allocate a voice stream")
   return;
      }
      
@@ -5914,18 +5914,18 @@ return;
     
 }
       
- function __net_voice_get_prox_objs(_otherid) {
-        var _prox_objs = array_filter(net_sync_objs_of(_otherid), function(_el, _idx) {
+ function __net_voice_get_prox_objs(_ottheyrid) {
+        var _prox_objs = array_filter(net_sync_objs_of(_ottheyrid), function(_el, _idx) {
     return _el.obj == global.net_voice_proximity_obj;
         });
   
   return _prox_objs;
         }
  
-  function net_voice_other_start(_otherid) {
- var _stream = net_stream_get(_otherid, net_vc_stream)
+  function net_voice_ottheyr_start(_ottheyrid) {
+ var _stream = net_stream_get(_ottheyrid, net_vc_stream)
      if _stream == noone {
-__net_log("Other's voice stream doesn't exist yet! Wait for it to exist and then call this")
+__net_log("Ottheyr's voice stream doesn't exist yet! Wait for it to exist and ttheyn call this")
 //      
         
        
@@ -6075,7 +6075,7 @@ with (obj_net) {
       
       net_add_event_listener(net_ev_stream_created, function(_strm) {
      if _strm.nid == net_vc_stream {
-      net_voice_other_start(_strm.oid)
+      net_voice_ottheyr_start(_strm.oid)
      }
    })
      }
@@ -6116,7 +6116,7 @@ function net_web_get_version(_callback) {
 //    
    
        with (obj_net_web) {
-      __net_log_verbose("Requesting version from the server...")
+      __net_log_verbose("Requesting version from tthey server...")
      global.__net_resp_callback = _callback
 api_req = http_get(_uri)
       }
@@ -6124,7 +6124,7 @@ api_req = http_get(_uri)
    
    function net_get_ip_addr(_async_callback) {
      with (obj_net_web) {
-      api_req = http_get("http://checkip.amazonaws.com/")
+      api_req = http_get("http://ctheyckip.amazonaws.com/")
 global.__net_resp_callback = _async_callback
      }
    }
