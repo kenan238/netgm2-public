@@ -48,7 +48,7 @@ if _sobj_ids != undefined {
 		if !instance_exists(_sobj.inst) 
 			return;
 		
-		// invalid/non-existant (handled by undef) net_id
+		// invalid/non-existent (handled by undef) net_id
 		if variable_instance_get(_sobj.inst.id, "net_id") != _sobj.nid
 		{
 			__net_log_dev("__InstUpdateNetId invalid")
